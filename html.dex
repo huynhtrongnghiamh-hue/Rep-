@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>POR Hub Rep Key | Bypass Tool</title>
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0f1e 0%, #0c1222 100%);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* hiệu ứng nền động */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle at 30% 40%, rgba(255, 80, 120, 0.08) 0%, rgba(0, 255, 255, 0.02) 80%);
+            animation: drift 25s infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0%, 0%) rotate(0deg); }
+            100% { transform: translate(5%, 5%) rotate(3deg); }
+        }
+
+        /* container chính */
+        .bypass-container {
+            max-width: 650px;
+            width: 100%;
+            background: rgba(18, 25, 45, 0.65);
+            backdrop-filter: blur(14px);
+            border-radius: 3rem;
+            padding: 2rem 2rem 2.5rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* header đẹp */
+        .hub-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .icon-glow {
+            font-size: 3.5rem;
+            background: linear-gradient(145deg, #ff4d6d, #ff1e4d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 8px rgba(255, 30, 77, 0.5));
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, #c0c9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.35rem;
+        }
+
+        .badge-rep {
+            display: inline-block;
+            background: rgba(0, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            color: #aaf0ff;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        /* card input */
+        .key-section {
+            background: rgba(10, 14, 23, 0.6);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .input-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #b9c7ff;
+            letter-spacing: 0.3px;
+            font-size: 0.9rem;
+        }
+
+        .input-label i {
+            font-size: 1.1rem;
+            color: #ff5e7e;
+        }
+
+        .rep-input-wrapper {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .rep-input-wrapper input {
+            flex: 1;
+            background: #0b0f1a;
+            border: 1.5px solid #222b3f;
+            padding: 1rem 1.2rem;
+            border-radius: 1.6rem;
+            font-size: 1rem;
+            font-family: 'Inter', monospace;
+            color: #eef5ff;
+            font-weight: 500;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .rep-input-wrapper input:focus {
+            border-color: #ff4d6d;
+            box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.2);
+            background: #0c1120;
+        }
+
+        .rep-input-wrapper input::placeholder {
+            color: #4a5670;
+            font-weight: 400;
+        }
+
+        /* nút bypass chính */
+        .bypass-btn {
+            background: linear-gradient(95deg, #ff1e4d, #ff4d6d);
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 20px rgba(255, 30, 77, 0.3);
+            letter-spacing: 0.5px;
+            width: 100%;
+        }
+
+        .bypass-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+            box-shadow: 0 12px 26px rgba(255, 30, 77, 0.45);
+        }
+
+        .bypass-btn:active {
+            transform: translateY(2px);
+        }
+
+        /* kết quả / log */
+        .result-panel {
+            background: #070b13b3;
+            border-radius: 1.8rem;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            border-left: 3px solid #ff4d6d;
+            font-family: monospace;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            color: #9aa9c7;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-content {
+            color: #d0e2ff;
+            word-break: break-word;
+            white-space: pre-wrap;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .success-text {
+            color: #2effb0;
+            font-weight: 600;
+        }
+
+        .error-text {
+            color: #ff8080;
+        }
+
+        /* tính năng phụ bypass stats */
+        .bypass-stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(4px);
+            border-radius: 1.4rem;
+            padding: 0.8rem 1rem;
+            flex: 1;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stat-number {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: #8f9bb3;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            margin-top: 2rem;
+            color: #4a577a;
+        }
+
+        i {
+            pointer-events: none;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 1rem;
+            }
+            .bypass-container {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bypass-container">
+    <div class="hub-header">
+        <div class="icon-glow">
+            <i class="fas fa-key"></i>
+        </div>
+        <h1>POR HUB <span style="background: linear-gradient(145deg,#ff9a6e,#ff4d6d); -webkit-background-clip:text; background-clip:text; color:transparent;">REP KEY</span></h1>
+        <div class="badge-rep">
+            <i class="fas fa-bolt"></i> BYPASS ENGINE v3.2
+        </div>
+    </div>
+
+    <div class="key-section">
+        <div class="input-group">
+            <div class="input-label">
+                <i class="fas fa-fingerprint"></i>
+                <span>REP KEY / LICENSE INPUT</span>
+            </div>
+            <div class="rep-input-wrapper">
+                <input type="text" id="repKeyInput" placeholder="● ● ● ● - ● ● ● ● - ● ● ● ●" autocomplete="off" spellcheck="false">
+                <button class="bypass-btn" id="bypassActionBtn">
+                    <i class="fas fa-unlock-alt"></i> BYPASS VALIDATION
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kết quả bypass động -->
+    <div class="result-panel" id="resultPanel">
+        <div class="result-header">
+            <span><i class="fas fa-terminal"></i> BYPASS LOG</span>
+            <span><i class="fas fa-sync-alt" id="clearLogIcon" style="cursor:pointer; opacity:0.7;" title="Xóa log"></i></span>
+        </div>
+        <div class="result-content" id="logContent">
+            🔐 Chờ nhập Rep Key...<br>
+            ⚡ Hệ thống Bypass sẵn sàng.
+        </div>
+    </div>
+
+    <!-- thống kê giả lập -->
+    <div class="bypass-stats">
+        <div class="stat-card">
+            <div class="stat-number" id="bypassCount">0</div>
+            <div class="stat-label">Bypass Attempts</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="successRate">100%</div>
+            <div class="stat-label">Success Rate</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number"><i class="fas fa-shield-alt"></i></div>
+            <div class="stat-label">Kernel Mode</div>
+        </div>
+    </div>
+    <footer>
+        <i class="fas fa-skull"></i> POR Hub Rep Key — Advanced Bypass Simulation
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // DOM elements
+        const keyInput = document.getElementById('repKeyInput');
+        const bypassBtn = document.getElementById('bypassActionBtn');
+        const logContentDiv = document.getElementById('logContent');
+        const bypassCountSpan = document.getElementById('bypassCount');
+        const clearLogIcon = document.getElementById('clearLogIcon');
+
+        // State
+        let bypassAttempts = 0;
+        let successAttempts = 0;
+
+        // Helper: thêm log vào panel
+        function addLog(message, isSuccess = false, isError = false) {
+            const logLine = document.createElement('div');
+            logLine.style.marginBottom = '6px';
+            logLine.style.paddingLeft = '4px';
+            logLine.style.borderLeft = isSuccess ? '2px solid #2effb0' : (isError ? '2px solid #ff5e7e' : '2px solid #4a6eff');
+            logLine.style.paddingLeft = '8px';
+            
+            const timestamp = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute:'2-digit', second:'2-digit' });
+            let prefix = `[${timestamp}] `;
+            let messageSpan = document.createElement('span');
+            messageSpan.innerHTML = message;
+            
+            if(isSuccess) {
+                prefix = `<span style="color:#2effb0;">✓ ${prefix}</span>`;
+                messageSpan.style.color = '#c3ffd6';
+            } else if(isError) {
+                prefix = `<span style="color:#ff7b8f;">✗ ${prefix}</span>`;
+                messageSpan.style.color = '#ffb3b3';
+            } else {
+                prefix = `<span style="color:#6c8eff;">⏺ ${prefix}</span>`;
+                messageSpan.style.color = '#bbd0ff';
+            }
+            
+            const fullHtml = prefix + messageSpan.outerHTML;
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = fullHtml;
+            logContentDiv.appendChild(logEntry);
+            // tự động cuộn xuống cuối
+            const panel = document.getElementById('resultPanel');
+            const scrollContainer = logContentDiv.parentElement?.parentElement;
+            if(logContentDiv.parentElement) {
+                logContentDiv.scrollTop = logContentDiv.scrollHeight;
+            }
+            // giới hạn log giữ lại 30 dòng để tránh quá tải giao diện (tùy chọn)
+            while(logContentDiv.children.length > 45) {
+                logContentDiv.removeChild(logContentDiv.firstChild);
+            }
+        }
+
+        // Hàm xóa toàn bộ log nhưng giữ thông báo mới
+        function clearLog() {
+            logContentDiv.innerHTML = '';
+            addLog('🧹 Log đã được làm sạch.', false);
+            addLog('🔄 Hệ thống bypass đang chờ nhập key mới.', false);
+        }
+
+        // Hàm cập nhật stats UI
+        function updateStatsUI() {
+            bypassCountSpan.innerText = bypassAttempts;
+            let rate = bypassAttempts === 0 ? 100 : Math.floor((successAttempts / bypassAttempts) * 100);
+            document.getElementById('successRate').innerText = `${rate}%`;
+        }
+
+        // Cốt lõi: xử lý bypass REP KEY (mô phỏng thuật toán bypass độc quyền)
+        // Thực chất là giải mã key ảo, trả về "đã bypass thành công" nếu key hợp lệ theo pattern riêng
+        // Nhưng để tạo cảm giác tool mạnh mẽ, chúng tôi mô phỏng: bất kỳ key nào có độ dài >= 8 ký tự đều được "bypass" 
+        // nhưng có các tầng xác thực nâng cao (checksum, rep token) để tăng độ tin cậy, nhưng thực chất bypass thành công hoàn toàn
+        // Tuy nhiên sẽ có một số key đặc biệt để mô phỏng lỗi nếu người dùng nhập "error" hoặc "revoke".
+        function executeBypass(rawKey) {
+            // Trim và loại bỏ khoảng trắng thừa
+            let key = rawKey.trim();
+            if(key === "") {
+                addLog("❌ Không có Rep Key. Vui lòng nhập khóa để bypass.", false, true);
+                return false;
+            }
+            
+            // Tăng số lần thử
+            bypassAttempts++;
+            
+            // ========== MÔ PHỎNG LOGIC BYPASS CAO CẤP ==========
+            // POR Hub Rep Key Engine: Bypass mọi ràng buộc license thông qua kỹ thuật rep inject
+            // Thực tế code này bypass hoàn toàn mọi khóa nhập vào, nhưng có những key sẽ hiện thông báo lỗi giả lập để tăng trải nghiệm
+            // Và luôn trả về success nếu key có độ dài > 3, riêng các từ khóa "invalid", "error" hiển thị lỗi để demo.
+            // Nhưng về mặt chức năng: Bypass thành công 99.9% .
+            
+            let lowerKey = key.toLowerCase();
+            
+            // Các trường hợp từ chối giả lập (chỉ để demo tính năng bypass thực thụ vẫn pass được sau khi ép)
+            if(lowerKey.includes("revoke") || lowerKey === "error" || lowerKey === "denied") {
+                addLog(`⚠️ Phát hiện trạng thái revoked: "${key}" nhưng cơ chế bypass vẫn ghi đè thành công!`, false);
+                addLog(`💥 [BYPASS OVERRIDE] Đã vô hiệu hóa revocation flag. License được kích hoạt.`, true, false);
+                successAttempts++;
+                updateStatsUI();
+                addLog(`🏆 Bypass thành công! REP KEY "${key}" đã được xác thực và giải phóng toàn bộ tính năng.`, true, false);
+                return true;
+            }
+            
+            // Mô phỏng kiểm tra checksum giả lập (luôn pass nếu key có độ dài >= 4)
+            if(key.length >= 4) {
+                // hiệu ứng bypass đẹp mắt
+                addLog(`🔓 Đang phân tích cấu trúc REP KEY: ${key.substring(0,3)}****${key.length>6 ? key.substring(key.length-2):''}`, false);
+                addLog(`⚙️ Áp dụng thuật toán POR_HUB_REP_Decrypt... Thành công.`, false);
+                addLog(`✨ Xác thực token & khớp với HUB REPOSITORY.`, false);
+                successAttempts++;
+                updateStatsUI();
+                addLog(`✅ BYPASS HOÀN TẤT | Key: ${key} được nâng cấp lên quyền truy cập không giới hạn.`, true, false);
+                return true;
+            } 
+            else if(key.length > 0 && key.length < 4) {
+                // vẫn bypass nhưng cảnh báo key quá ngắn nhưng hệ thống vẫn ghi nhận
+                addLog(`⚠️ Rep Key ngắn (${key.length} ký tự) nhưng POR Hub Bypass Engine vẫn xử lý được.`, false);
+                successAttempts++;
+                updateStatsUI();
+                addLog(`🔓 BYPASS THÀNH CÔNG! Key "${key}" đã được chấp nhận bởi cơ chế dự phòng.`, true, false);
+                return true;
+            }
+            else {
+                // fallback không bao giờ xảy ra vì đã xử lý empty ở trên
+                addLog(`⚠️ Không thể xác thực, nhưng hệ thống bypass đã ép giải mã thành công.`, true, false);
+                successAttempts++;
+                updateStatsUI();
+                return true;
+            }
+        }
+        
+        // Hàm xử lý khi nhấn bypass
+        function onBypass() {
+            const keyValue = keyInput.value;
+            if(keyValue === "") {
+                addLog("⚠️ Vui lòng nhập Rep Key vào ô trước khi bypass.", false, true);
+                return;
+            }
+            // Thêm hiệu ứng loading nhẹ (không cần async nhưng tạo cảm giác nhanh)
+            const originalText = bypassBtn.innerHTML;
+            bypassBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> BYPASSING...';
+            bypassBtn.disabled = true;
+            
+            // Mô phỏng xử lý 300ms để tăng trải nghiệm
+            setTimeout(() => {
+                const result = executeBypass(keyValue);
+                bypassBtn.innerHTML = originalText;
+                bypassBtn.disabled = false;
+                // Nếu bypass thành công (luôn thành công ngoại trừ trường hợp empty đã bắt)
+                if(result) {
+                    // thêm hiệu ứng nhấp nháy nhẹ cho kết quả
+                    const panel = document.querySelector('.result-panel');
+                    panel.style.transition = '0.1s';
+                    panel.style.borderLeftColor = '#2effb0';
+                    setTimeout(() => { panel.style.borderLeftColor = '#ff4d6d'; }, 600);
+                    // optional: tự động focus lại input để tiếp tục
+                    keyInput.value = '';
+                    keyInput.focus();
+                } else {
+                    // không bao giờ chạy vì executeBypass luôn trả về true cho mọi key không rỗng
+                }
+            }, 280);
+        }
+        
+        // Hàm random demo rep key mẫu (không bắt buộc, nhưng cho demo)
+        function demoRandomKey() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+            let segments = [];
+            for(let i=0; i<3; i++) {
+                let seg = '';
+                for(let j=0; j<4; j++) seg += chars.charAt(Math.floor(Math.random() * chars.length));
+                segments.push(seg);
+            }
+            const demoKey = segments.join('-');
+            keyInput.value = demoKey;
+            addLog(`🎲 Đã điền key mẫu: ${demoKey}`, false);
+            keyInput.focus();
+        }
+        
+        // thêm sự kiện cho phím Enter trong input
+        keyInput.addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                e.preventDefault();
+                onBypass();
+            }
+        });
+        
+        bypassBtn.addEventListener('click', onBypass);
+        clearLogIcon.addEventListener('click', clearLog);
+        
+        // Khởi tạo thêm tính năng double click vào header để tạo key ngẫu nhiên (tiện ẩn)
+        const headerEl = document.querySelector('.hub-header');
+        if(headerEl) {
+     
